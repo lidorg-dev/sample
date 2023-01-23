@@ -1,4 +1,4 @@
-FROM node
+FROM 127.0.0.1:8082/node
 WORKDIR /src/app
 
 
