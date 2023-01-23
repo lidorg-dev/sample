@@ -1,6 +1,6 @@
 pipeline {
         agent {
-  label 'centos7'
+  label 'docker'
         } 
 
     stages {
@@ -12,13 +12,13 @@ pipeline {
         }
         stage('Build') {
             steps {
-                    sh '''docker build . -t lidorlg/node:${BUILD_ID} '''
+                    sh '''docker build . -t 127.0.0.1:8083/node:${BUILD_ID} '''
                
             }
         }
         stage('Test') {
             steps {
-                sh 'docker run  --name node-test -itd -p 3000:3000 lidorlg/node:${BUILD_ID} '
+                sh 'docker run  --name node-test -itd -p 3000:3000 127.0.0.1:8083/node:${BUILD_ID} '
                 sh 'curl localhost:3000'
                 sh 'docker stop node-test'
                 sh 'docker rm node-test'
@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Push to Docker Hub ') {
             steps {
-                sh "docker push lidorlg/node:${BUILD_ID} "
+                sh "docker push 127.0.0.1:8083/node:${BUILD_ID} "
 
             }
         }
