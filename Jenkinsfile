@@ -24,6 +24,7 @@ pipeline {
         }
         stage('Test') {
             steps {
+                sh 'docker rm -f node-test'
                 sh 'docker run  --name node-test -itd -p 3000:3000 127.0.0.1:8083/node:${BUILD_ID} '
                 sh 'curl localhost:3000'
                 sh 'docker stop node-test'
