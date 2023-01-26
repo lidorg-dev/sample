@@ -43,6 +43,7 @@ pipeline {
             }
        }
    }
+/*
     post {
         always {
              chuckNorris()  
@@ -60,3 +61,4 @@ pipeline {
     }
 
 }
+*/
