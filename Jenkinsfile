@@ -11,14 +11,15 @@ pipeline {
             }
         }
         stage('Build') {
-                withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'password_nexus', usernameVariable: 'nexus_username')]) {
+               
                             steps {
+                               withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'password_nexus', usernameVariable: 'nexus_username')]) {
                     
                                         sh '''  docker login 127.0.0.1:8082 -u $nexus_username -p $password_nexus '''
                                         sh '''docker build . -t 127.0.0.1:8083/node:${BUILD_ID} '''
                
-                            }
-                }
+                                }
+                             }
             
         }
         stage('Test') {
