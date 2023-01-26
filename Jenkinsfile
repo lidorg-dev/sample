@@ -37,10 +37,11 @@ pipeline {
                     
                                         sh '''  docker login 127.0.0.1:8083 -u $nexus_username -p $password_nexus '''
                                         sh "docker push 127.0.0.1:8083/node:${BUILD_ID} "
+               }
 
-                }
             }
        }
+   }
     post {
         always {
              chuckNorris()  
